@@ -1,5 +1,3 @@
-# eng1-c1g11.github.io
-
 # ENG1 Cohort 1, Group 11
 
 ## PDF Documents for Assessment 1
@@ -14,6 +12,8 @@
 
 - [Github Repository](http://example.com)
 - [Executable JAR](http://example.com)
+
+## Additional Content
 
 | User Requirements Table |  |  |
 | ----- | ----- | ----- |
