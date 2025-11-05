@@ -14,20 +14,23 @@ Below are the documents, source code, binaries for our project, and additional d
 | 📋**Requirements**                   |📎 [View](http://example.com) |
 | ⚠️**Risk Assessment & Mitigation**   |📎 [View](http://example.com) |
 
----
+
+<hr style="border-top: 2px solid #ddd; margin: 30px 0;">
 
 ## 🛠️ **Source Code & Binaries**
 
 - 📎[GitHub Repository](http://example.com)
 - 📎[Executable JAR](http://example.com)
 
----
+
+<hr style="border-top: 2px solid #ddd; margin: 30px 0;">
 
 ## 📚 **Additional Content**
 
 - 📎[Notion Project Tracker](https://www.notion.so/ENG-1-Cohort-1-Group-11-27fedfe88d848037b001d8861813dfa?source=copy_link)
 
----
+
+<hr style="border-top: 2px solid #ddd; margin: 30px 0;">
 
 ## ✅ **User Requirements Table**
 
