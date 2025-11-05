@@ -7,8 +7,6 @@ Below are the documents, source code, binaries for our project, and additional d
 <div style="background:#f9f9f9; padding:20px; border-radius:10px; margin-bottom:20px;">
   <h2 style="font-size:1.5em;">📄 PDF Documents for Assessment 1</h2>
 
-## 📄 **PDF Documents for Assessment 1**
-
 | Document Name                  | Link                                |
 |--------------------------------|--------------------------------     |
 | 🏗️**Architecture**                   |📎 [View](http://example.com) |
