@@ -6,7 +6,7 @@ Below are the documents, source code, binaries for our project, and additional d
 
 ##   PDF Documents for Assessment 1
 
-| Document Name                  | Link                            |
+| Document Name                  | Link                           |
 |--------------------------------|--------------------------------|
 | Architecture                   | [View](http://example.com)     |
 | Implementation                 | [View](http://example.com)     |
