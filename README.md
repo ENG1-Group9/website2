@@ -36,16 +36,3 @@ Here you can see what we've built and the key technical contributions.
 ---
 
 
-##  **User Requirements Table**
-
-| ID               | Description                                               | Priority |
-|------------------|-----------------------------------------------------------|----------|
-| UR_ESCAPE_MAZE    | The user must be able to escape from a maze              | Shall    |
-| UR_POWER_UPS      | The user may collect powerups to escape faster           | May      |
-| UR_TIME_LIMIT     | The user must escape the maze within a 5-minute time limit | Shall |
-| UR_OBSTACLES      | There must be obstacles that hinder the user’s progress | Shall    |
-| UR_UI             | The user shall have a smooth experience navigating the game | -      |
-| UR_MAZE           | There must be a maze for the user to escape from         | Shall    |
-| UR_DEAN           | There must be a dean that the user must avoid            | Shall    |
-
-
