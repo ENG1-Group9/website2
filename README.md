@@ -9,15 +9,6 @@ This ENG1 Assessment 1 is based on a given scenario: a single-player game where 
 
 ---
 
-## **Key Technical Contributions**
-- **ECS** - Efficient project structure
-- **Fixed Step System** - Inspired by Unity for consistent simulation
-- **Modular System** - Flexible and well-structured
-  
-[See more details of technical contributions](architecture.md)
-  
----
-
 ##  **PDF Documents for Assessment 1**
 
 | Document Name                  | Link                                |
@@ -33,6 +24,15 @@ This ENG1 Assessment 1 is based on a given scenario: a single-player game where 
 
 - 📎[GitHub Repository](http://example.com)
 - 📎[Executable JAR](http://example.com)
+---
+
+## **Key Technical Contributions**
+- **ECS** - Efficient project structure
+- **Fixed Step System** - Inspired by Unity for consistent simulation
+- **Modular System** - Flexible and well-structured
+  
+[See more details of technical contributions](architecture.md)
+  
 ---
 
 ##  **Additional Content**
