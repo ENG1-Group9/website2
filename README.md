@@ -1,8 +1,13 @@
 #  **Welcome to Cohort 1 Group 11's Website!**
 
-Here you can see what we've built and the key technical contributions.
+This website introduces our group project for ENG1 Assessment 1, including key documents, source code, and other materials
+.
 
 ---
+## **Overview**
+This ENG1 Assessment 1 is based on a given scenario: a single-player game where the player must escape from a maze implemented in Java 17. The implementation should include a 5-minute timer, an event counter, and one negative, one positive, and one hidden event.
+---
+
 ## **Key Technical Contributions**
 - **ECS** - Efficient project structure
 - **Fixed Step System** - Inspired by Unity for consistent simulation
