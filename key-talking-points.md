@@ -1,9 +1,3 @@
----
-title: Key Talking Points
-permalink: /key-talking-points
-layout: default
----
-
 
 ## **Our Key Technical Contributions**
 An overview of our team's key contributions to Escape from Uni.
