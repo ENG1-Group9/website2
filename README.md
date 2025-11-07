@@ -31,7 +31,7 @@ This ENG1 Assessment 1 is based on a given scenario: a single-player game where 
 - **Fixed Step System** - Inspired by Unity for consistent simulation
 - **Modular System** - Flexible and well-structured
   
-[See more details of technical contributions](architecture.md)
+[See more details of technical contributions](key-talking-points.md)
   
 ---
 
