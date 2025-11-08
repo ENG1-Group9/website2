@@ -22,8 +22,8 @@ This ENG1 Assessment 1 is based on a given scenario: a single-player game where 
 ---
 ##  **Source Code & Binaries**
 
-- 📎[GitHub Repository](http://example.com)
-- 📎[Executable JAR](http://example.com)
+- [GitHub Repository](http://example.com)
+- [Executable JAR](http://example.com)
 ---
 
 ## **Key Technical Contributions**
