@@ -48,7 +48,7 @@ Detailed information of our technical contributions in *Escape from Uni*.
 
 **Why:** Because each system is independent, the structure stays clean, making the project easy to update and flexible.
 
-**Evidence:** 
+**Evidence:** [View PDF](https://drive.google.com/file/d/1JIuPX_ObCz7U2jNfdZ0B1K2PS-U4s4uY/view?usp=sharing)
 
 ---
 
