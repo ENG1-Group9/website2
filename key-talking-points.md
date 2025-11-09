@@ -1,7 +1,7 @@
 ---
-Title: Key-talking-points
+
 layout: default
-permalink: /key-talking-points
+Title: Key-talking-points
 ---
 
 
