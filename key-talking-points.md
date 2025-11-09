@@ -1,7 +1,7 @@
 ---
 
 layout: default
-Title: Key-talking-points
+title: Key-talking-points
 ---
 
 
