@@ -9,7 +9,7 @@ permalink: /architecture-diagrams/
 
 **Behaviour Activity**
 <img src="{{ '/assets/images/new-architecture-behavorial-diagram.png' | relative_url }}" 
-     alt="Behavioural Diagram" width="700">
+     alt="Behavioural Diagram" width="500">
 
 **Structural** 
 <img src="{{ '/assets/images/aarchitecture-structural-diagram.png' | relative_url }}" 
@@ -19,6 +19,9 @@ permalink: /architecture-diagrams/
 
 **Class** 
 <br>
-<img src="{{ '/assets/images/architecture-class-diagram.png' | relative_url }}" alt="Class Diagram" style="margin-top:10px;" width="700">
+<img src="{{ '/assets/images/architecture-class-diagram.png' | relative_url }}" alt="Class Diagram" style="margin-top:10px;" width="500">
 
+**Sequence**
+<img src="{{ '/assets/images/sequence-diagram.png' | relative_url }}" 
+     alt="Sequence Diagram" width="600">
 
