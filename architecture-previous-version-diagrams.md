@@ -1,5 +1,7 @@
-# Previous version of diagrams
-
+---
+layout: default
+Title: Previous version of diagrams
+---
 **Structural Version 1:** [View PNG](https://drive.google.com/file/d/1cI2dwEghF8Bzaj1nn8TXwcDwxq4tiXef/view?usp=sharing)
 
 **Structural Version 2:** [View PNG](https://drive.google.com/file/d/18CrlBU3u6zD7bRJP0FmSJu_vYjHuI5sK/view?usp=sharing)
