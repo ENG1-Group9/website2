@@ -3,12 +3,19 @@ layout: default
 title: Previous behaviour diagram
 ---
 
-**Behaviour Version 1:** [View PNG](https://drive.google.com/file/d/1M8kWsUf0TaJQ5Sw7Y-2EMUD4xp_qXbtr/view?usp=sharing)
+**Behaviour Version 1:** 
+<img src="{{ '/assets/images/architecture-behavioral-diagramVersion1.png' | relative_url }}" alt="Behaviour Version 1" width="700">
 
-**Behaviour Version 2:** [View PNG](https://drive.google.com/file/d/1pPdC99gSD5Nkfi8mHXWrD4K2CjCP__Ek/view?usp=sharing)
+**Behaviour Version 2:**
+<img src="{{ '/assets/images/architecture-behavioral-diagramVersion2.png' | relative_url }}" alt="Behaviour Version 2" width="700">
 
-**Behaviour Version 3:** [View PNG](https://drive.google.com/file/d/1Fl3_JhjlL1PmzAV2UUsMrtrjxYwxxFNO/view?usp=sharing)
 
-**Behaviour Version 4:** [View PNG](https://drive.google.com/file/d/1WVPPWUf1Tkw0rmcd8H8p3qC_tliFGqnT/view?usp=sharing)
+**Behaviour Version 3:** 
+<img src="{{ '/assets/images/architecture-behavioral-diagramVersion3.png' | relative_url }}" alt="Behaviour Version 3" width="700">
 
-**Behaviour Prototype:** [View PNG](https://drive.google.com/file/d/1ZaaL7jaCxrsgJTUw3ZP4sReMdIJckH5i/view?usp=sharing)
+**Behaviour Version 4:** 
+<img src="{{ '/assets/images/architecture-behavioral-diagramVersion4.png' | relative_url }}" alt="Behaviour Version 4" width="700">
+
+
+**Behaviour Prototype:**
+<img src="{{ '/assets/images/architecture-behavioural-diagram.png' | relative_url }}" alt="Behaviour Prototype" width="700">
