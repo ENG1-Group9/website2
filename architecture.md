@@ -1,4 +1,5 @@
 ---
+Title: Architecture
 layout: default
 permalink: /architecture
 ---
