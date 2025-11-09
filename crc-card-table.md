@@ -12,20 +12,13 @@ Our ECS approach splits the game into:
 - **Components** -> store data  
 - **Systems** -> handle behaviour and logic  
 - **Messages** -> let different systems talk to each other  
-**Goose component:** 
-<img src="{{ '/assets/images/goose-component.png' | relative_url }}" alt="Goose CRC" width="700">
-
 This makes it easier to add new features or change old ones without breaking everything else.
-
----
-**Interactable component:**
-<img src="{{ '/assets/images/interactable-component.png' | relative_url }}" alt="Interactable CRC" width="700">
 
 ## Components
 
 These are the data bits attached to entities. They don’t do anything on their own - the systems read from them and update them.
 
-| Component | What it does | Works with |
+| Component | Responsibilities | Collaborators |
 |------------|--------------|-------------|
 | **CameraFollowComponent** | Tells the camera which entity to follow (usually the player). | WorldCameraSystem, TransformComponent |
 | **GooseComponent** | Stores info for the goose enemy, like if it's chasing the player or patrolling. | GooseSystem, TransformComponent, PhysicsComponent, PlayerComponent |
