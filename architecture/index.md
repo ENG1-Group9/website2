@@ -1,7 +1,6 @@
 ---
-Title: Architecture
 layout: default
-permalink: /architecture
+title: Architecture
 ---
 
 # Architecture Overview
