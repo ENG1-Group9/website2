@@ -1,6 +1,6 @@
 ---
 layout: page
-title: CRC Card Table
+title: CRC Card Tables
 ---
 
 # CRC Card Table
@@ -12,6 +12,7 @@ Our ECS approach splits the game into:
 - **Components** -> store data  
 - **Systems** -> handle behaviour and logic  
 - **Messages** -> let different systems talk to each other  
+
 This makes it easier to add new features or change old ones without breaking everything else.
 
 ## Components
@@ -38,14 +39,14 @@ These are the data bits attached to entities. They don’t do anything on their 
 
 These handle the behaviour and logic. Each one focuses on a single job, like physics, input, rendering, or audio.
 
-| System | What it does | Works with |
+| Component | Responsibilities | Collaborators |
 |--------|---------------|-------------|
 | **PlayerSystem** | Reads player input, moves the character, and updates animations or sounds. | PlayerComponent, PhysicsComponent, AnimationComponent, AudioSystem |
 | **PhysicsSystem** | Runs Box2D physics at a fixed timestep to keep movement smooth and stable. | PhysicsComponent, TransformComponent, SafeBodyDestroy, MessagePublisher |
 | **PhysicsSyncSystem** | Syncs transforms with physics bodies after updates. | TransformComponent, PhysicsComponent |
 | **PhysicsToTransformSystem** | Copies body positions from Box2D to the entity transforms before rendering. | TransformComponent, PhysicsComponent, RenderingSystem |
 | **RenderingSystem** | Draws all sprites and animations in the correct order (based on Y-position and layer). | SpriteComponent, AnimationComponent, TransformComponent, RenderOrderComparator |
-| **AudioSystem** | Plays sounds in response to messages (like footsteps, goose bites, or winning). | AudioListenerComponent, SoundMessage, WorldSoundMessage, MessagePublisher |
+| **AudioSystem** | Plays sounds in response to messages (like footsteps, goose bites, or the victory sound). | AudioListenerComponent, SoundMessage, WorldSoundMessage, MessagePublisher |
 | **HiddenWallSystem** | Toggles hidden walls when it receives the right trigger message. | HiddenWallComponent, MessagePublisher, InteractableSystem |
 | **InteractableSystem** | Checks if the player interacts with an object and sends out messages (like collecting an item). | InteractableComponent, PlayerComponent, MessagePublisher |
 | **GooseSystem** | Controls the goose AI - handles chasing the player and reacting to collisions. | GooseComponent, PlayerComponent, MessagePublisher |
@@ -59,7 +60,7 @@ These handle the behaviour and logic. Each one focuses on a single job, like phy
 
 These are the classes that connect systems together and handle smaller jobs like asset loading and sorting.
 
-| Class | What it does | Works with |
+| Component | Responsibilities | Collaborators |
 |--------|--------------|-------------|
 | **Message** | The base class for sending events around the game. | MessagePublisher, MessageListener |
 | **MessagePublisher** | Sends messages to anything that's subscribed. | All Systems |
