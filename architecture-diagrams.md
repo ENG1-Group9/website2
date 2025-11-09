@@ -7,8 +7,11 @@ permalink: /architecture-diagrams/
 
 ## Edited version of diagrams
 
-**Behaviour Activity** [View PNG](https://drive.google.com/file/d/1hxaIvMO7SvuDvgEDbA2aJ2fF154yfSUj/view?usp=sharing)
+**Behaviour Activity**
+<img src="{{ '/assets/images/architecture-behaviorial-diagram.png' | relative_url }}" alt="Behavioural Diagram" width="700">
 
-**Structural** [View PNG](https://drive.google.com/file/d/1u5mS6RA8sfPP_-Pos1E7p03KQXEv-1Rw/view?usp=drive_link)
+**Structural** 
+<img src="{{ '/assets/images/architecture-structural-diagram.png' | relative_url }}" alt="Structural Diagram" width="700">
 
-**Class** [View PNG](https://drive.google.com/file/d/1_CX5Tm_QZ_Ze2ZgUNvc4u5Z5iBBsAd4E/view?usp=drive_link)
+**Class** 
+<img src="{{ '/assets/images/architecture-class-diagram.png' | relative_url }}" alt="Class Diagram" width="700">
