@@ -25,6 +25,15 @@ title: CRC card table
 **Timer component:** <img src="{{ '/assets/images/timer-component.png' | relative_url }}" alt="Timer CRC" width="700">
 
 
+**Transform component:** <img src="{{ '/assets/images/transform-component.png' | relative_url }}" alt="Transform CRC" width="700">
 
-**Transform component:** <img src="{{ '/assets/images/transform.png' | relative_url }}" alt="Transform CRC" style="width:100%; max-width:700px;">
+**Animation component:** <img src="{{ '/assets/images/animation-component.png' | relative_url }}" alt="Animation CRC" width="700">
+
+**Audio listener component:** <img src="{{ '/assets/images/audio-listener-component.png' | relative_url }}" alt="Audio Listener CRC" width="700">
+
+**Hidden wall component:** <img src="{{ '/assets/images/hidden-wall-component.png' | relative_url }}" alt="Hidden Wall CRC" width="700">
+
+
+
+
 
