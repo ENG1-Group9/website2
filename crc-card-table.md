@@ -95,7 +95,7 @@ They also helped us link our requirements to the actual code. For example:
 
 ## Notes
 
-Making these cards early on was really helpful. It let us spot overlap between systems and simplify the design.  
+Making these cards early on was really helpful. It let us spot overlap between systems and simplify the design.
 For example, we originally put the camera logic in PlayerSystem, but moving it into a separate WorldCameraSystem made things much cleaner.
 
 Overall, the CRC cards gave us a simple way to plan and communicate how everything fits together in our ECS design.
