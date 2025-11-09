@@ -12,7 +12,9 @@ permalink: /architecture-diagrams/
 
 
 **Structural** 
-<img src="{{ '/assets/images/architecture-structural-diagram.png' | relative_url }}" alt="Structural Diagram" style="width:100%; max-width:1100px; margin:20px 0 50px 0; display:block;">
+<img src="{{ '/assets/images/aarchitecture-structural-diagram.png' | relative_url }}" 
+     alt="Structural Diagram" 
+     style="width:100%; max-width:1100px; margin:20px 0 50px 0; display:block;">
 
 
 **Class** 
