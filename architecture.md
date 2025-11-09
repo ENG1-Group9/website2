@@ -79,6 +79,6 @@ Detailed information of our technical contributions in *Escape from Uni*.
 
 ---
 
-## [See more diagrams](architecturediagrams.md)
+## [See more diagrams](architecture diagrams.md)
 
 
