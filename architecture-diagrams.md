@@ -22,4 +22,6 @@ permalink: /architecture-diagrams/
 <img src="{{ '/assets/images/architecture-class-diagram.png' | relative_url }}" alt="Class Diagram" style="margin-top:10px;" width="700">
 
 **Sequence**
+<img src="{{ '/assets/images/sequence-diagram.png' | relative_url }}" 
+     alt="Behavioural Diagram" width="700">
 
