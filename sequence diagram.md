@@ -1,6 +1,6 @@
 ---
 layout: default
-titile: sequence diagram
+title: sequence diagram
 ---
 
 **Sequence**
