@@ -2,3 +2,14 @@ url: "https://eng1-c1g11.github.io"
 baseurl: ""
 theme: minima
 
+
+header_pages:
+  - index.md
+  - architecture/index.md
+  - architecture-diagrams.md
+  - architecture-previous-version-behaviour-diagram.md
+  - architecture-previous-version-structural-diagrams.md
+  - key-talking-points.md
+  - crc-card-table.md
+
+
