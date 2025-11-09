@@ -29,14 +29,3 @@ title: weekly tasks
 
 
 
-
-
-
-
-
-
-
-**Week 2:**
-
-
-
