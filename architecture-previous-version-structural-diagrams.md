@@ -9,7 +9,6 @@ title: Previous version of structural diagrams
 **Structural Version 2:** 
 <img src="{{ '/assets/images/architecture-structural-diagramVersion2.png' | relative_url }}" alt="Structural Version 2" width="700">
 
-**Structural Version 3:**  
 
 **Structural Version 3:** 
 <img src="{{ '/assets/images/architecture-structural-diagramVersion3.png' | relative_url }}" alt="Structural Version 3" width="700">
