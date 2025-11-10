@@ -9,7 +9,7 @@ title: Technical Information
 An overview of our team's key contributions to Escape from Uni.
 
 ## Codebase Javadoc
-- <span style="font-size:1em">[Javadoc](/javadoc)</span>
+- <span style="font-size:1em">[Javadoc](/assets/javadoc)</span>
 
 ## **Technologies and Tools Used**
 
