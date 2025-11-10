@@ -5,7 +5,7 @@ permalink: /architecture-diagrams/
 
 ---
 
-## Edited version of diagrams
+## Finalised Diagrams
 
 **Behaviour Activity**
 <img src="{{ 'assets/images/ArchitectureBehavorialDiagram.png' | relative_url }}" 
