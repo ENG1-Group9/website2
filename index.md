@@ -27,7 +27,7 @@ This ENG1 Assessment 1 is based on a given scenario: a single-player game where 
 
 ## **Source Code & Binaries**
 
-- <span style="font-size:1em;">[GitHub Repository](http://example.com)</span>  
+- <span style="font-size:1em;">[GitHub Repository](https://github.com/FreddieUoY/ENG1-project)</span>  
 - <span style="font-size:1em;">[Executable JAR](/assets/Maze11-1.0.0.jar/)</span>
 - <span style="font-size:1em">[Javadoc](/assets/javadoc)</span>
 
