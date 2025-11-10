@@ -18,10 +18,10 @@ This ENG1 Assessment 1 is based on a given scenario: a single-player game where 
 | Document Name                  | Link                                |
 |--------------------------------|--------------------------------     |
 | **Architecture**                   | [View](https://docs.google.com/document/d/1VWEBIGhYX-dHWcc5yUUEUAMqSP19-GA-GZRUQhdQzU8/edit?tab=t.0#heading=h.jfsbl5rxnizp) |
-| **Implementation**                 | [View](https://docs.google.com/document/d/1-fG7q55DeXajzrxo1ggfW4zpGLjwV7cc0SoTdWO0_cA/edit?tab=t.0#heading=h.jfsbl5rxnizp) |
+| **Implementation**                 | <a href="/assets/Impl1.pdf" target="_blank">View</a> |
 | **Method Selection & Planning**    | [View](https://docs.google.com/document/d/1bhRj7-zyHSUiPtp9DgKJPN5mhjcWwNzEUupdvXSzbng/edit?tab=t.0#heading=h.jfsbl5rxnizp) |
-| **Requirements**                   | [View](https://docs.google.com/document/d/1bxOIGIrXyXTpwaCIAnqtrXOml0hehnkAKW8EJ7yHmwQ/edit?tab=t.0#heading=h.jfsbl5rxnizp) |
-| **Risk Assessment & Mitigation**   | [View](https://docs.google.com/document/d/1XoTuO3CZR3b51g8yo2V59H_yjzBjtp2aEZOAU0mMzHE/edit?tab=t.0) |
+| **Requirements** | <a href="/assets/Req1.pdf" target="_blank">View</a> |
+| **Risk Assessment & Mitigation**   | <a href="/assets/Risk1.pdf" target="_blank">View</a> |
 
 ---
 
