@@ -5,7 +5,9 @@ layout: default
 
 <details>
     <summary><strong>Architecture Structural Diagram - show/hide</strong></summary>
-        ```puml
+
+        {% raw %}
+        ```plantuml
         @startuml architectureStructuralDiagram
 
         title __Structural Diagram__
@@ -170,10 +172,14 @@ layout: default
         HiddenWalls *-- TransformComponent
         @enduml
         ```
+        {% endraw %}
+
 </details>
 
 <details>
     <summary><strong>Prototype Architecture Behavioural Diagram - show/hide</strong></summary>
+
+        {% raw %}
         ```puml
         @startuml PrototypeArchitectureBehavorialDiagram
         title __Prototype Activity Diagram__
@@ -199,10 +205,14 @@ layout: default
 
         @enduml
         ```
+        {% endraw %}
+
 </details>
 
 <details>
     <summary><strong>Architecture Behavioural Diagram - show/hide</strong></summary>
+
+        {% raw %}
         ```puml
         @startuml "ArchitectureBehavorialDiagram"
 
@@ -231,10 +241,14 @@ layout: default
 
         @enduml
         ```
+        {% endraw %}
+
 </details>
 
 <details>
     <summary><strong>Architecture Class Diagram - show/hide</strong></summary>
+
+        {% raw %}
         ```puml
         @startuml architectureClassDiagram
 
@@ -280,10 +294,14 @@ layout: default
 
         @enduml
         ```
+        {% endraw %}
+
 </details>
 
 <details>
     <summary><strong>Sequence Diagram - show/hide</strong></summary>
+
+        {% raw %}
         ```puml
         @startuml
 
@@ -306,4 +324,6 @@ layout: default
 
         @enduml
         ```
+        {% endraw %}
+        
 </details>
