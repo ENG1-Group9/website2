@@ -18,7 +18,6 @@ Welcome to Group 9's extension of the Maze Game originally developed by Team 11.
 | [ ] | Upload Eval2.pdf to /assets/ |
 | [ ] | Upload CI2.pdf to /assets/ |
 | [ ] | Upload final MazeGame-2.0.jar to /assets/ folder |
-| [ ] | Edit index.md with actual Group 9 GitHub URL |
 | [ ] | Upload 'jacoco' folder to /assets/testing/ for HTML report |
 | [ ] | Update assets/testing/index.md |
 
