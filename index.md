@@ -10,16 +10,16 @@ Welcome to Group 9's extension of the Maze Game originally developed by Team 11.
 ## **Internal Team Progress Tracker**
 *(Remove this section before final submission)*
 
-| Status | Task | Marks | Details |
+| Status | Task | Details |
 |:---:|---|:---:|---|
-| [x] | **Website: Structure & Layout** | - | Reorganized homepage to show Part 2 first. |
-| [x] | **Website: Navigation Cleanup** | - | Removed old team pages from top menu (config.yml). |
-| [x] | **Website: Testing Page Setup** | - | Created assets/testing/index.md placeholder. |
-| [ ] | **Website: Upload PDF Reports** | 3 (Total) | Upload Change2, Impl2, Test2, Eval2, CI2 to /assets/. |
-| [ ] | **Website: Upload Game JAR** | - | Upload final MazeGame-2.0.jar to /assets/ folder. |
-| [ ] | **Website: Update Repo Link** | - | Edit index.md with actual Group 9 GitHub URL. |
-| [ ] | **Website: Upload Coverage** | - | Upload 'jacoco' folder to /assets/testing/ for HTML report. |
-| [ ] | **Website: Manual Test Logs** | - | Fill table in assets/testing/index.md with real tests. |
+| [x] | **Website: Structure & Layout** | Reorganized homepage to show Part 2 first. |
+| [x] | **Website: Navigation Cleanup** | Removed old team pages from top menu (config.yml). |
+| [x] | **Website: Testing Page Setup** | Created assets/testing/index.md placeholder. |
+| [ ] | **Website: Upload PDF Reports** | Upload Change2, Impl2, Test2, Eval2, CI2 to /assets/. |
+| [ ] | **Website: Upload Game JAR** | Upload final MazeGame-2.0.jar to /assets/ folder. |
+| [ ] | **Website: Update Repo Link** | Edit index.md with actual Group 9 GitHub URL. |
+| [ ] | **Website: Upload Coverage** |  Upload 'jacoco' folder to /assets/testing/ for HTML report. |
+| [ ] | **Website: Manual Test Logs** | Fill table in assets/testing/index.md with real tests. |
 
 ---
 
