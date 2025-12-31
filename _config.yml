@@ -1,3 +1,5 @@
 url: "https://eng1-group9.github.io"
 baseurl: "/website2"
 theme: minima
+nav_pages:
+  - index.md
