@@ -7,37 +7,48 @@ title: Group 9 - Assessment 2
 
 Welcome to Group 9's extension of the Maze Game originally developed by Team 11.
 
-## **Internal Team Progress Tracker**
-*(Remove this section before final submission)*
+## **Team Progress Tracker**
 
-| Status | Task | Details |
-|:---:|---|:---:|---|
-| [x] | **Website: Structure & Layout** | Reorganized homepage to show Part 2 first. |
-| [x] | **Website: Navigation Cleanup** | Removed old team pages from top menu (config.yml). |
-| [x] | **Website: Testing Page Setup** | Created assets/testing/index.md placeholder. |
-| [ ] | **Website: Upload PDF Reports** | Upload Change2, Impl2, Test2, Eval2, CI2 to /assets/. |
-| [ ] | **Website: Upload Game JAR** | Upload final MazeGame-2.0.jar to /assets/ folder. |
-| [ ] | **Website: Update Repo Link** | Edit index.md with actual Group 9 GitHub URL. |
-| [ ] | **Website: Upload Coverage** |  Upload 'jacoco' folder to /assets/testing/ for HTML report. |
-| [ ] | **Website: Manual Test Logs** | Fill table in assets/testing/index.md with real tests. |
+| Status | Task |
+|:---:|---|
+| [x] | Setup Website |
+| [ ] | Upload Change2.pdf to /assets/ |
+| [ ] | Upload Impl2.pdf to /assets/ |
+| [ ] | Upload Test2.pdf to /assets/ |
+| [ ] | Upload Eval2.pdf to /assets/ |
+| [ ] | Upload CI2.pdf to /assets/ |
+| [ ] | Upload final MazeGame-2.0.jar to /assets/ folder |
+| [ ] | Edit index.md with actual Group 9 GitHub URL |
+| [ ] | Upload 'jacoco' folder to /assets/testing/ for HTML report |
+| [ ] | Update assets/testing/index.md |
 
 ---
 
 ## **Assessment 2 Deliverables**
 
-| Deliverable | Link | Description |
-|---|---|---|
-| **Change Report** | [Change2.pdf](/assets/Change2.pdf) | Processes, tools, and justification of changes to original deliverables. |
-| **Implementation Report** | [Impl2.pdf](/assets/Impl2.pdf) | Details of the new implementation and 3rd-party libraries. |
-| **Testing Report** | [Test2.pdf](/assets/Test2.pdf) | Testing methods, results, and coverage statistics. |
-| **User Evaluation** | [Eval2.pdf](/assets/Eval2.pdf) | Report on user evaluation sessions and usability findings. |
-| **CI Report** | [CI2.pdf](/assets/CI2.pdf) | Continuous Integration methods and infrastructure. |
+| Deliverable | Link |
+|---|---|
+| **Change Report** | [Change2.pdf](/assets/Change2.pdf) |
+| **Implementation Report** | [Impl2.pdf](/assets/Impl2.pdf) |
+| **Testing Report** | [Test2.pdf](/assets/Test2.pdf) |
+| **User Evaluation** | [Eval2.pdf](/assets/Eval2.pdf) |
+| **CI Report** | [CI2.pdf](/assets/CI2.pdf) |
 
 ### **Project Code & Executables (Part 2)**
-- **GitHub Repository:** [Group 9 GitHub Repo](https://github.com/ENG1-Group9/maze-game)
+- **GitHub Repository:** [Group 9 GitHub Repo](https://github.com/ENG1-Group9/eng1-project-2)
 - **Executable Game:** [Download MazeGame-2.0.jar](/assets/MazeGame-2.0.jar)
-- **Testing Material:** [Test Coverage / Results](/assets/testing/index.html) *(Link to be updated)*
+- **Testing Material:** [Test Coverage / Results](/assets/testing/index.html)
 
+
+
+
+
+
+
+
+---
+---
+---
 ---
 
 ## **Assessment 1 (Original Team 11 Work)**
@@ -51,15 +62,14 @@ Welcome to Group 9's extension of the Maze Game originally developed by Team 11.
 | **Requirements**                   | <a href="/assets/Req1.pdf" target="_blank">View</a> |
 | **Risk Assessment & Mitigation**   | <a href="/assets/Risk1.pdf" target="_blank">View</a> |
 
-### **Original Source Code (Team 11)**
+### **Source Code (Team 11)**
 - <span style="font-size:1em;">[Original GitHub Repository](https://github.com/FreddieUoY/ENG1-project)</span>  
 - <span style="font-size:1em;">[Original Executable JAR](/assets/Maze11-1.0.0.jar/)</span>
 - <span style="font-size:1em">[Original Javadoc](/assets/javadoc)</span>
 
 ---
 
-## **Legacy Team 11 Design Documents**
-*(Supporting documents from the previous version of the website)*
+## **Team 11 Design Documents**
 
 - [Key Talking Points](key-talking-points.md)
 - [Architecture Index](architecture/index.md)
