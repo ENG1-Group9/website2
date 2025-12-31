@@ -1,3 +1,3 @@
-url: "https://eng1-group9.github.io/website2/"
-baseurl: ""
+url: "https://eng1-group9.github.io"
+baseurl: "/website2"
 theme: minima
