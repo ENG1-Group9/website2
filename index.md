@@ -3,11 +3,7 @@ layout: page
 title: Group 9 - Assessment 2
 ---
 
-# **Group 9 Assessment 2 Submission**
-
-Welcome to Group 9's extension of the Maze Game originally developed by Team 11.
-
-## **Team Progress Tracker**
+## **Temp Progress Tracker**
 
 | Status | Task |
 |:---:|---|
@@ -33,19 +29,29 @@ Welcome to Group 9's extension of the Maze Game originally developed by Team 11.
 | **User Evaluation** | [Eval2.pdf](/assets/Eval2.pdf) |
 | **CI Report** | [CI2.pdf](/assets/CI2.pdf) |
 
-### **Project Code & Executables (Part 2)**
+### **Project Code & Executables**
 - **GitHub Repository:** [Group 9 GitHub Repo](https://github.com/ENG1-Group9/eng1-project-2)
 - **Executable Game:** [Download MazeGame-2.0.jar](/assets/MazeGame-2.0.jar)
 - **Testing Material:** [Test Coverage / Results](/assets/testing/index.html)
 
+### **Additional Files**
+[Architecture Diagrams](https://docs.google.com/document/d/1sY86_4DMP9FGCYZ8whc26dkKyifiX5kL6Iz5SJlbs48/edit?usp=sharing)
+[Project Plans](https://docs.google.com/document/d/1Bw5TaLOa3MprQc4rDNqLCm17ZGdJCxE6/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
+[Usability Test Plan](https://drive.google.com/file/d/1EgsMJxQ8TLPdVJn_J7Q9hCDij-NfisdY/view?usp=sharing)
+[User Evaluation Information Sheet](https://docs.google.com/document/d/1c44USY0Q7A-P-0d2Z0KlgOSY8w8odl8i3C9LePDo7KA/edit?usp=sharing)
+[User Evaluation Informed Consent Form](https://docs.google.com/forms/d/e/1FAIpQLSeRQGWYrpdiF9N4oeAnfxqeDNVQqsV2eDsrC9_MGu7k54fm8A/viewform?usp=sharing&ouid=102156333874116374617)
+[User Evaluation 1](https://docs.google.com/document/d/1_SljX7WN3VTL153--tBpJ0OHVpbP_qfCrRyxeeSFqWA/edit?usp=sharing)
+[User Evaluation 2](https://docs.google.com/document/d/1cjn9Eu6apv-FGlYLr2GwEuN2FVq9tMb4W4NRjDc7Rps/edit?usp=sharing)
+[User Evaluation 3](https://docs.google.com/document/d/1MhN5bT5fB7j63f8TxPf9yCbmFEvgJEx3iuBanLzJ5ZM/edit?usp=sharing)
+[User Evaluation 4](https://docs.google.com/document/d/1ejOFXlaeGOBXOkIX8-JtVi3vPQr1l2y7JxsS6nZU4vA/edit?usp=sharing)
+[User Evaluation 5](https://docs.google.com/document/d/1g6Q5ZfYQ3bbpaqb_NgledC4vDWMbGWWkKz10C6hQS8U/edit?usp=sharing)
+[User Evaluation 6](https://docs.google.com/document/d/1su1weUwHvboDmxyIvthkpH7pk8J6FGrlQJAOAGOL5Uo/edit?usp=sharing)
+[User Evaluation Template](https://docs.google.com/document/d/1RSYxCw31fAlRr3he7omXdcBkWCj2CGjzIWO79zQmsII/edit?usp=sharing)
+[User Evaluation Data](https://docs.google.com/document/d/1nMJyTupp2bOtNxMnnUsPSZ7Ch8u1mPW8byLSMWz8PvY/edit?usp=sharing)
+[User Severity Reporting Form](https://docs.google.com/forms/d/e/1FAIpQLSfPwtE583xukWs_TkixwxRF2roNXyKsK7T1VegiqAlLsPLazA/viewform?usp=sharing&ouid=102156333874116374617)
+[User Serverity Reporting Responses Sheet](https://docs.google.com/spreadsheets/d/1FWB8bBsmIomY66YbYZXt2eudSW-anwOMXJ9-dW2p5g8/edit?usp=sharing)
 
 
-
-
-
-
-
----
 ---
 ---
 ---
