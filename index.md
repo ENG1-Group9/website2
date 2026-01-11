@@ -7,15 +7,11 @@ title: Group 9 - Assessment 2
 
 | Status | Task |
 |:---:|---|
-| [x] | Setup Website |
 | [ ] | Upload Change2.pdf to /assets/ |
-| [ ] | Upload Impl2.pdf to /assets/ |
 | [ ] | Upload Test2.pdf to /assets/ |
 | [ ] | Upload Eval2.pdf to /assets/ |
-| [ ] | Upload CI2.pdf to /assets/ |
 | [ ] | Upload final MazeGame-2.0.jar to /assets/ folder |
 | [ ] | Upload 'jacoco' folder to /assets/testing/ for HTML report |
-| [ ] | Update assets/testing/index.md |
 
 ---
 
@@ -32,11 +28,13 @@ title: Group 9 - Assessment 2
 ### **Project Code & Executables**
 - **GitHub Repository:** [Group 9 GitHub Repo](https://github.com/ENG1-Group9/eng1-project-2)
 - **Executable Game:** [Download MazeGame-2.0.jar](/assets/MazeGame-2.0.jar)
-- **Testing Material:** [Test Coverage / Results](/assets/testing/index.html)
 
 ### **Additional Files**
+- [Architecture](https://docs.google.com/document/d/1IbNEnPPL5-mLQAyF9toB1-rA_xnYJmetRO1DgLcbrf4/edit?usp=sharing)
 - [Architecture Diagrams](https://docs.google.com/document/d/1sY86_4DMP9FGCYZ8whc26dkKyifiX5kL6Iz5SJlbs48/edit?usp=sharing)
 - [Project Plans](https://docs.google.com/document/d/1Bw5TaLOa3MprQc4rDNqLCm17ZGdJCxE6/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
+- [Requirements](https://docs.google.com/document/d/1Fr74oQ265sDXxq0mgGPCxJFyegCR9_whGPDsIw6JpoE/edit?usp=sharing)
+- [Risk Assessment and Mitigation](https://docs.google.com/document/d/1tPsnrNDhvyZiBB0z6QVkKJYlfKOlAfZwBhAZNnI9nFI/edit?usp=sharing)
 - [Usability Test Plan](https://drive.google.com/file/d/1EgsMJxQ8TLPdVJn_J7Q9hCDij-NfisdY/view?usp=sharing)
 - [User Evaluation Information Sheet](https://docs.google.com/document/d/1c44USY0Q7A-P-0d2Z0KlgOSY8w8odl8i3C9LePDo7KA/edit?usp=sharing)
 - [User Evaluation Informed Consent Form](https://docs.google.com/forms/d/e/1FAIpQLSeRQGWYrpdiF9N4oeAnfxqeDNVQqsV2eDsrC9_MGu7k54fm8A/viewform?usp=sharing&ouid=102156333874116374617)
