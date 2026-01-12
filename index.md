@@ -3,16 +3,6 @@ layout: page
 title: Group 9 - Assessment 2
 ---
 
-## **Temp Progress Tracker**
-
-| Status | Task |
-|:---:|---|
-| [ ] | Upload Test2.pdf to /website2/assets/ |
-| [ ] | Upload final MazeGame-2.0.jar to /website2/assets/ folder |
-| [ ] | Upload 'jacoco' folder to /website2/assets/testing/ for HTML report |
-
----
-
 ## **Assessment 2 Deliverables**
 
 | Deliverable | Link |
@@ -30,9 +20,13 @@ title: Group 9 - Assessment 2
 ### **Additional Files**
 - [Architecture](https://docs.google.com/document/d/1IbNEnPPL5-mLQAyF9toB1-rA_xnYJmetRO1DgLcbrf4/edit?usp=sharing)
 - [Architecture Diagrams](https://docs.google.com/document/d/1sY86_4DMP9FGCYZ8whc26dkKyifiX5kL6Iz5SJlbs48/edit?usp=sharing)
+- [HTML Testing Report](/website2/assets/testing/index.html)
+- [JaCoCo Coverage Report](/website2/assets/coverage/jacocoTestReport.html)
+- [Method Selection & Planning 2](https://docs.google.com/document/d/1QPgjeUYUeHglFrCspNvM9g3OW56peIS4/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
 - [Project Plans](https://docs.google.com/document/d/1Bw5TaLOa3MprQc4rDNqLCm17ZGdJCxE6/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
 - [Requirements](https://docs.google.com/document/d/1Fr74oQ265sDXxq0mgGPCxJFyegCR9_whGPDsIw6JpoE/edit?usp=sharing)
 - [Risk Assessment and Mitigation](https://docs.google.com/document/d/1tPsnrNDhvyZiBB0z6QVkKJYlfKOlAfZwBhAZNnI9nFI/edit?usp=sharing)
+- [Tracability Matrix](https://docs.google.com/spreadsheets/d/16xH7IEtAyMZ-W8K7464Ik_THOhb4B4P7Ow9x-HECTIk/edit?usp=sharing)
 - [Usability Test Plan](https://drive.google.com/file/d/1EgsMJxQ8TLPdVJn_J7Q9hCDij-NfisdY/view?usp=sharing)
 
 ### **Evaluation Additional Files**
