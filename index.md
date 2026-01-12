@@ -7,11 +7,10 @@ title: Group 9 - Assessment 2
 
 | Status | Task |
 |:---:|---|
-| [ ] | Upload Change2.pdf to /assets/ |
-| [ ] | Upload Test2.pdf to /assets/ |
-| [ ] | Upload Eval2.pdf to /assets/ |
-| [ ] | Upload final MazeGame-2.0.jar to /assets/ folder |
-| [ ] | Upload 'jacoco' folder to /assets/testing/ for HTML report |
+| [ ] | Upload Test2.pdf to /website2/assets/ |
+| [ ] | Upload Eval2.pdf to /website2/assets/ |
+| [ ] | Upload final MazeGame-2.0.jar to /website2/assets/ folder |
+| [ ] | Upload 'jacoco' folder to /website2/assets/testing/ for HTML report |
 
 ---
 
@@ -19,15 +18,15 @@ title: Group 9 - Assessment 2
 
 | Deliverable | Link |
 |---|---|
-| **Change Report** | [Change2.pdf](/assets/Change2.pdf) |
-| **Implementation Report** | [Impl2.pdf](/assets/Impl2.pdf) |
-| **Testing Report** | [Test2.pdf](/assets/Test2.pdf) |
-| **User Evaluation** | [Eval2.pdf](/assets/Eval2.pdf) |
-| **CI Report** | [CI2.pdf](/assets/CI2.pdf) |
+| **Change Report** | [Change2.pdf](/website2/assets/Change2.pdf) |
+| **Implementation Report** | [Impl2.pdf](/website2/assets/Impl2.pdf) |
+| **Testing Report** | [Test2.pdf](/website2/assets/Test2.pdf) |
+| **User Evaluation** | [Eval2.pdf](/website2/assets/Eval2.pdf) |
+| **CI Report** | [CI2.pdf](/website2/assets/CI2.pdf) |
 
 ### **Project Code & Executables**
 - **GitHub Repository:** [Group 9 GitHub Repo](https://github.com/ENG1-Group9/eng1-project-2)
-- **Executable Game:** [Download MazeGame-2.0.jar](/assets/MazeGame-2.0.jar)
+- **Executable Game:** [Download MazeGame-2.0.jar](/website2/assets/MazeGame-2.0.jar)
 
 ### **Additional Files**
 - [Architecture](https://docs.google.com/document/d/1IbNEnPPL5-mLQAyF9toB1-rA_xnYJmetRO1DgLcbrf4/edit?usp=sharing)
@@ -62,16 +61,16 @@ title: Group 9 - Assessment 2
 
 | Document Name                  | Link                                |
 |--------------------------------|--------------------------------     |
-| **Architecture**                   | <a href="/assets/Arch1.pdf" target="_blank">View</a> |
-| **Implementation**                 | <a href="/assets/Impl1.pdf" target="_blank">View</a> |
-| **Method Selection & Planning**    | <a href="/assets/Plan1.pdf" target="_blank">View</a> |
-| **Requirements**                   | <a href="/assets/Req1.pdf" target="_blank">View</a> |
-| **Risk Assessment & Mitigation**   | <a href="/assets/Risk1.pdf" target="_blank">View</a> |
+| **Architecture**                   | <a href="/website2/assets/Arch1.pdf" target="_blank">View</a> |
+| **Implementation**                 | <a href="/website2/assets/Impl1.pdf" target="_blank">View</a> |
+| **Method Selection & Planning**    | <a href="/website2/assets/Plan1.pdf" target="_blank">View</a> |
+| **Requirements**                   | <a href="/website2/assets/Req1.pdf" target="_blank">View</a> |
+| **Risk Assessment & Mitigation**   | <a href="/website2/assets/Risk1.pdf" target="_blank">View</a> |
 
 ### **Source Code (Team 11)**
 - <span style="font-size:1em;">[Original GitHub Repository](https://github.com/FreddieUoY/ENG1-project)</span>  
-- <span style="font-size:1em;">[Original Executable JAR](/assets/Maze11-1.0.0.jar/)</span>
-- <span style="font-size:1em">[Original Javadoc](/assets/javadoc)</span>
+- <span style="font-size:1em;">[Original Executable JAR](/website2/assets/Maze11-1.0.0.jar/)</span>
+- <span style="font-size:1em">[Original Javadoc](/website2/assets/javadoc)</span>
 
 ---
 
