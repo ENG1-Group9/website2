@@ -8,7 +8,6 @@ title: Group 9 - Assessment 2
 | Status | Task |
 |:---:|---|
 | [ ] | Upload Test2.pdf to /website2/assets/ |
-| [ ] | Upload Eval2.pdf to /website2/assets/ |
 | [ ] | Upload final MazeGame-2.0.jar to /website2/assets/ folder |
 | [ ] | Upload 'jacoco' folder to /website2/assets/testing/ for HTML report |
 
