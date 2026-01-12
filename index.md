@@ -21,7 +21,7 @@ title: Group 9 - Assessment 2
 - [Architecture](https://docs.google.com/document/d/1IbNEnPPL5-mLQAyF9toB1-rA_xnYJmetRO1DgLcbrf4/edit?usp=sharing)
 - [Architecture Diagrams](https://docs.google.com/document/d/1sY86_4DMP9FGCYZ8whc26dkKyifiX5kL6Iz5SJlbs48/edit?usp=sharing)
 - [HTML Testing Report](/website2/assets/testing/index.html)
-- [JaCoCo Coverage Report](/website2/assets/coverage/jacocoTestReport.html)
+- [JaCoCo Coverage Report](/website2/assets/coverage/html/index.html)
 - [Manual Test Report](https://docs.google.com/document/d/1m4DO6wpoN7Hk_AVAxnR2UBc1vICBVTUE/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
 - [Method Selection & Planning 2](https://docs.google.com/document/d/1QPgjeUYUeHglFrCspNvM9g3OW56peIS4/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
 - [Project Plans](https://docs.google.com/document/d/1Bw5TaLOa3MprQc4rDNqLCm17ZGdJCxE6/edit?usp=sharing&ouid=102156333874116374617&rtpof=true&sd=true)
