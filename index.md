@@ -63,7 +63,7 @@ title: Group 9 - Assessment 2
 
 ### **Source Code (Team 11)**
 - <span style="font-size:1em;">[Original GitHub Repository](https://github.com/FreddieUoY/ENG1-project)</span>  
-- <span style="font-size:1em;">[Original Executable JAR](/website2/assets/Maze11-1.0.0.jar/)</span>
+- <span style="font-size:1em;">[Original Executable JAR](/website2/assets/Maze11-1.0.0.jar)</span>
 - <span style="font-size:1em">[Original Javadoc](/website2/assets/javadoc)</span>
 
 ---
