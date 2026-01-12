@@ -68,7 +68,7 @@ title: Group 9 - Assessment 2
 
 ---
 
-## **Team 11 Design Documents**
+## **Team 11 Additional Files**
 
 - [Key Talking Points](key-talking-points.md)
 - [Architecture Index](architecture/index.md)
