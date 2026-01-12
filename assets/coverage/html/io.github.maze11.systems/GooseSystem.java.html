@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GooseSystem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.systems</a> &gt; <span class="el_source">GooseSystem.java</span></div><h1>GooseSystem.java</h1><pre class="source lang-java linenums">package io.github.maze11.systems;
+
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import io.github.maze11.components.AnimationComponent;
+import io.github.maze11.components.GooseComponent;
+import io.github.maze11.components.GooseComponent.GooseAnimState;
+import io.github.maze11.components.InteractableComponent;
+import io.github.maze11.components.PhysicsComponent;
+import io.github.maze11.components.TransformComponent;
+import io.github.maze11.fixedStep.FixedStepper;
+import io.github.maze11.fixedStep.IteratingFixedStepSystem;
+import io.github.maze11.messages.GooseBiteMessage;
+import io.github.maze11.messages.MessageListener;
+import io.github.maze11.messages.MessagePublisher;
+import io.github.maze11.messages.MessageType;
+import io.github.maze11.messages.ToastMessage;
+
+public class GooseSystem extends IteratingFixedStepSystem {
+
+<span class="nc" id="L24">  ComponentMapper&lt;GooseComponent&gt; gooseMapper = ComponentMapper.getFor(GooseComponent.class);</span>
+<span class="nc" id="L25">  ComponentMapper&lt;TransformComponent&gt; transformMapper =</span>
+<span class="nc" id="L26">      ComponentMapper.getFor(TransformComponent.class);</span>
+<span class="nc" id="L27">  ComponentMapper&lt;PhysicsComponent&gt; physicsMapper = ComponentMapper.getFor(PhysicsComponent.class);</span>
+<span class="nc" id="L28">  ComponentMapper&lt;InteractableComponent&gt; interactableMapper =</span>
+<span class="nc" id="L29">      ComponentMapper.getFor(InteractableComponent.class);</span>
+
+<span class="nc" id="L31">  ComponentMapper&lt;AnimationComponent&gt; animMapper = ComponentMapper.getFor(AnimationComponent.class);</span>
+
+  private Entity target;
+  private final MessageListener messageListener;
+
+  public GooseSystem(FixedStepper fixedStepper, MessagePublisher publisher) {
+<span class="nc" id="L37">    super(</span>
+        fixedStepper,
+<span class="nc" id="L39">        Family.all(</span>
+                GooseComponent.class,
+                TransformComponent.class,
+                PhysicsComponent.class,
+                InteractableComponent.class,
+                AnimationComponent.class)
+<span class="nc" id="L45">            .get());</span>
+
+<span class="nc" id="L47">    this.messageListener = new MessageListener(publisher);</span>
+<span class="nc" id="L48">  }</span>
+
+  public void setTarget(Entity target) {
+<span class="nc" id="L51">    this.target = target;</span>
+<span class="nc" id="L52">  }</span>
+
+  @Override
+  protected void fixedStepProcessEntity(Entity entity, float deltaTime) {
+
+<span class="nc" id="L57">    handleMessages();</span>
+
+<span class="nc" id="L59">    GooseComponent goose = gooseMapper.get(entity);</span>
+
+<span class="nc" id="L61">    var transform = transformMapper.get(entity);</span>
+<span class="nc" id="L62">    var targetTransform = transformMapper.get(target);</span>
+<span class="nc" id="L63">    var physics = physicsMapper.get(entity);</span>
+<span class="nc" id="L64">    var interactable = interactableMapper.get(entity);</span>
+
+<span class="nc" id="L66">    Vector2 displacement = new Vector2(targetTransform.position).sub(transform.position);</span>
+
+<span class="nc" id="L68">    var data =</span>
+        new ProcessData(
+            entity,
+            deltaTime,
+            goose,
+            transform,
+            physics,
+            interactable,
+            targetTransform,
+            displacement);
+
+    // AI behaviour
+<span class="nc bnc" id="L80" title="All 4 branches missed.">    switch (goose.state) {</span>
+<span class="nc" id="L81">      case WANDER -&gt; processWander(data);</span>
+<span class="nc" id="L82">      case CHASE -&gt; processChase(data);</span>
+<span class="nc" id="L83">      case RETREAT -&gt; processRetreat(data);</span>
+    }
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+<span class="nc" id="L87">    AnimationComponent&lt;GooseAnimState&gt; anim =</span>
+<span class="nc" id="L88">        (AnimationComponent&lt;GooseAnimState&gt;) animMapper.get(entity);</span>
+
+<span class="nc" id="L90">    Vector2 vel = physics.body.getLinearVelocity();</span>
+<span class="nc" id="L91">    GooseAnimState newAnimState = resolveAnimation(vel, goose.animState);</span>
+
+    // Reset animation when switching states
+<span class="nc bnc" id="L94" title="All 2 branches missed.">    if (anim.currentState != newAnimState) {</span>
+<span class="nc" id="L95">      anim.currentState = newAnimState;</span>
+<span class="nc" id="L96">      anim.elapsed = 0f;</span>
+    } else {
+<span class="nc" id="L98">      anim.elapsed += deltaTime;</span>
+    }
+
+<span class="nc" id="L101">    var animation = anim.animations.get(anim.currentState);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">    if (animation != null) {</span>
+<span class="nc" id="L103">      anim.currentFrame = animation.getKeyFrame(anim.elapsed, true);</span>
+    }
+
+    // Save for next frame
+<span class="nc" id="L107">    goose.animState = newAnimState;</span>
+<span class="nc" id="L108">  }</span>
+
+  /**
+   * Determines which animation the goose should play according to its velocity
+   *
+   * @param vel The current velocity the goose is moving at
+   * @param last The last animation: used as a default if the goose is not moving
+   * @return
+   */
+  private GooseAnimState resolveAnimation(Vector2 vel, GooseAnimState last) {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">    if (vel.len2() &lt; 0.01f) {</span>
+      // Idle version of last direction
+<span class="nc bnc" id="L120" title="All 4 branches missed.">      return switch (last) {</span>
+<span class="nc" id="L121">        case WALK_UP, IDLE_UP -&gt; GooseAnimState.IDLE_UP;</span>
+<span class="nc" id="L122">        case WALK_RIGHT, IDLE_RIGHT -&gt; GooseAnimState.IDLE_RIGHT;</span>
+<span class="nc" id="L123">        case WALK_DOWN, IDLE_DOWN -&gt; GooseAnimState.IDLE_DOWN;</span>
+<span class="nc" id="L124">        case WALK_LEFT, IDLE_LEFT -&gt; GooseAnimState.IDLE_LEFT;</span>
+      };
+    }
+
+    // Movement → direction-based walk
+<span class="nc bnc" id="L129" title="All 2 branches missed.">    if (Math.abs(vel.x) &gt; Math.abs(vel.y)) {</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">      return vel.x &gt; 0 ? GooseAnimState.WALK_RIGHT : GooseAnimState.WALK_LEFT;</span>
+    } else {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">      return vel.y &gt; 0 ? GooseAnimState.WALK_UP : GooseAnimState.WALK_DOWN;</span>
+    }
+  }
+
+  /**
+   * Consumes any new messages it received and reacts. If the goose has bitten a player, it turns to
+   * flee.
+   */
+  private void handleMessages() {
+<span class="nc bnc" id="L141" title="All 2 branches missed.">    while (messageListener.hasNext()) {</span>
+<span class="nc" id="L142">      var message = messageListener.next();</span>
+
+<span class="nc bnc" id="L144" title="All 2 branches missed.">      if (message.type == MessageType.GOOSE_BITE) {</span>
+
+<span class="nc" id="L146">        messageListener.publisher.publish(</span>
+            new ToastMessage(&quot;You got bitten by a Goose! (-10 Score)&quot;, 2f));
+
+<span class="nc" id="L149">        Entity entity = ((GooseBiteMessage) message).getInteractable();</span>
+<span class="nc" id="L150">        var gooseComponent = gooseMapper.get(entity);</span>
+<span class="nc" id="L151">        enterRetreat(gooseComponent);</span>
+      }
+<span class="nc" id="L153">    }</span>
+<span class="nc" id="L154">  }</span>
+
+  /** Perform fixed update processing for a goose in the wander state */
+  private void processWander(ProcessData data) {
+<span class="nc bnc" id="L158" title="All 2 branches missed.">    if (magnitudeIsWithin(data.displacementFromTarget, data.goose.detectionRadius)) {</span>
+<span class="nc" id="L159">      enterChase(data.goose);</span>
+<span class="nc" id="L160">      return;</span>
+    }
+
+<span class="nc" id="L163">    var goose = data.goose;</span>
+
+<span class="nc bnc" id="L165" title="All 2 branches missed.">    if (goose.currentWanderWaypoint == null) {</span>
+<span class="nc" id="L166">      goose.currentWanderWaypoint = new Vector2();</span>
+<span class="nc" id="L167">      randomiseWaypoint(goose);</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">    } else if (magnitudeIsWithin(</span>
+<span class="nc" id="L169">        data.transform.position.cpy().sub(goose.currentWanderWaypoint),</span>
+        goose.wanderAcceptDistance)) {
+<span class="nc" id="L171">      randomiseWaypoint(goose);</span>
+    }
+
+<span class="nc" id="L174">    Vector2 direction = new Vector2(goose.currentWanderWaypoint).sub(data.transform.position).nor();</span>
+
+<span class="nc" id="L176">    data.physics.body.setLinearVelocity(direction.scl(goose.wanderSpeed));</span>
+<span class="nc" id="L177">  }</span>
+
+  /** Perform fixed update processing for a goose in the chase state */
+  private void processChase(ProcessData data) {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">    if (!magnitudeIsWithin(data.displacementFromTarget, data.goose.forgetRadius)) {</span>
+<span class="nc" id="L182">      enterWander(data.goose);</span>
+<span class="nc" id="L183">      return;</span>
+    }
+
+<span class="nc" id="L186">    Vector2 velocity = new Vector2(data.displacementFromTarget).nor().scl(data.goose.chaseSpeed);</span>
+
+<span class="nc" id="L188">    data.physics.body.setLinearVelocity(velocity);</span>
+<span class="nc" id="L189">  }</span>
+
+  /** Perform fixed update processing for a goose in the retreat state */
+  private void processRetreat(ProcessData data) {
+
+<span class="nc" id="L194">    data.goose.retreatTimeElapsed += data.deltaTime;</span>
+
+<span class="nc bnc" id="L196" title="All 2 branches missed.">    if (data.goose.retreatTimeElapsed &gt; data.goose.retreatTime) {</span>
+<span class="nc" id="L197">      data.interactable.interactionEnabled = true;</span>
+<span class="nc" id="L198">      enterChase(data.goose);</span>
+    }
+
+<span class="nc" id="L201">    Vector2 velocity = new Vector2(data.displacementFromTarget).nor().scl(-data.goose.retreatSpeed);</span>
+
+<span class="nc" id="L203">    data.physics.body.setLinearVelocity(velocity);</span>
+<span class="nc" id="L204">  }</span>
+
+  /** Switches the goose provided to the wander state from whichever state it is currently in */
+  private void enterWander(GooseComponent goose) {
+<span class="nc" id="L208">    goose.state = GooseComponent.GooseState.WANDER;</span>
+<span class="nc" id="L209">  }</span>
+
+  /** Switches the goose provided to the chase state from whichever state it is currently in */
+  private void enterChase(GooseComponent goose) {
+<span class="nc" id="L213">    goose.state = GooseComponent.GooseState.CHASE;</span>
+<span class="nc" id="L214">  }</span>
+
+  /** Switches the goose provided to the retreat state from whichever state it is currently in */
+  private void enterRetreat(GooseComponent goose) {
+<span class="nc" id="L218">    goose.retreatTimeElapsed = 0f;</span>
+<span class="nc" id="L219">    goose.state = GooseComponent.GooseState.RETREAT;</span>
+<span class="nc" id="L220">  }</span>
+
+  private boolean magnitudeIsWithin(Vector2 v, float limit) {
+<span class="nc bnc" id="L223" title="All 2 branches missed.">    return v.len2() &lt;= limit * limit;</span>
+  }
+
+  /**
+   * Picks a new waypoint for this goose to walk towards
+   *
+   * @param goose The goose in need of a waypoint
+   */
+  private void randomiseWaypoint(GooseComponent goose) {
+<span class="nc" id="L232">    float dist = (float) Math.sqrt(MathUtils.random()) * goose.wanderRadius;</span>
+
+<span class="nc" id="L234">    goose.currentWanderWaypoint.setToRandomDirection().scl(dist).add(goose.homePosition);</span>
+<span class="nc" id="L235">  }</span>
+
+<span class="nc" id="L237">  private record ProcessData(</span>
+      Entity entity,
+      float deltaTime,
+      GooseComponent goose,
+      TransformComponent transform,
+      PhysicsComponent physics,
+      InteractableComponent interactable,
+      TransformComponent target,
+      Vector2 displacementFromTarget) {}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

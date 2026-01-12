@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PiSystem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.systems</a> &gt; <span class="el_source">PiSystem.java</span></div><h1>PiSystem.java</h1><pre class="source lang-java linenums">package io.github.maze11.systems;
+
+import io.github.maze11.fixedStep.FixedStepSystem;
+import io.github.maze11.fixedStep.FixedStepper;
+import io.github.maze11.messages.Message;
+import io.github.maze11.messages.MessageListener;
+import io.github.maze11.messages.MessagePublisher;
+import io.github.maze11.messages.MessageType;
+
+public class PiSystem extends FixedStepSystem{
+    private final MessageListener messageListener;
+<span class="fc" id="L12">    private static int slicesCollected = 0;</span>
+
+    public PiSystem(FixedStepper stepper, MessagePublisher messagePublisher) {
+<span class="nc" id="L15">    super(stepper);</span>
+<span class="nc" id="L16">    this.messageListener = new MessageListener(messagePublisher);</span>
+<span class="nc" id="L17">  }</span>
+
+  @Override
+  public void fixedUpdate(float deltaTime) {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">    while (messageListener.hasNext()) {</span>
+<span class="nc" id="L22">      Message msg = messageListener.next();</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">      if (msg.type == MessageType.PI_COLLECT) {</span>
+<span class="nc" id="L25">        slicesCollected++;</span>
+<span class="nc" id="L26">        System.out.println(&quot;Pi Collected&quot;);</span>
+      }
+<span class="nc" id="L28">    }</span>
+<span class="nc" id="L29">  }</span>
+
+  public static int getSlicesCollected() {
+<span class="fc" id="L32">    return slicesCollected;</span>
+  }
+  
+  public static void reset() {
+<span class="nc" id="L36">    slicesCollected = 0;</span>
+<span class="nc" id="L37">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

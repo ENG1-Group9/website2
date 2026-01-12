@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AttendanceSystem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.systems</a> &gt; <span class="el_source">AttendanceSystem.java</span></div><h1>AttendanceSystem.java</h1><pre class="source lang-java linenums">package io.github.maze11.systems;
+
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import io.github.maze11.components.AttendanceCheckerComponent;
+import io.github.maze11.fixedStep.FixedStepper;
+import io.github.maze11.fixedStep.IteratingFixedStepSystem;
+import io.github.maze11.messages.Message;
+import io.github.maze11.messages.MessageListener;
+import io.github.maze11.messages.MessagePublisher;
+import io.github.maze11.messages.MessageType;
+
+/** Updates attendance checker. */
+public class AttendanceSystem extends IteratingFixedStepSystem {
+<span class="fc" id="L16">  private final ComponentMapper&lt;AttendanceCheckerComponent&gt; attendM =</span>
+<span class="fc" id="L17">      ComponentMapper.getFor(AttendanceCheckerComponent.class);</span>
+  private final MessageListener messageListener;
+
+  // constructor to define the family of entities this system will process
+  public AttendanceSystem(FixedStepper stepper, MessagePublisher messagePublisher) {
+<span class="fc" id="L22">    super(stepper, Family.all(AttendanceCheckerComponent.class).get());</span>
+<span class="fc" id="L23">    this.messageListener = new MessageListener(messagePublisher);</span>
+<span class="fc" id="L24">  }</span>
+
+  @Override
+  public void fixedUpdate(float deltaTime) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    while (messageListener.hasNext()) {</span>
+<span class="fc" id="L29">      Message msg = messageListener.next();</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">      if (msg.type == MessageType.CHECK_IN_CODE_COLLECT) {</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (Entity entity : getEntities()) {</span>
+<span class="fc" id="L33">          AttendanceCheckerComponent attendanceChecker = attendM.get(entity);</span>
+<span class="fc" id="L34">          attendanceChecker.codeCollected();</span>
+<span class="fc" id="L35">        }</span>
+      }
+<span class="fc" id="L37">    }</span>
+<span class="fc" id="L38">  }</span>
+
+  @Override
+  protected void fixedStepProcessEntity(Entity entity, float deltaTime) {
+    // No actions need to be taken
+<span class="nc" id="L43">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

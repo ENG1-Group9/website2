@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayerSystem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.systems</a> &gt; <span class="el_source">PlayerSystem.java</span></div><h1>PlayerSystem.java</h1><pre class="source lang-java linenums">package io.github.maze11.systems;
+
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.math.Vector2;
+import io.github.maze11.MazeGame;
+import io.github.maze11.assetLoading.AssetId;
+import io.github.maze11.assetLoading.AssetLoader;
+import io.github.maze11.components.AnimationComponent;
+import io.github.maze11.components.PhysicsComponent;
+import io.github.maze11.components.PlayerComponent;
+import io.github.maze11.components.PlayerComponent.PlayerState;
+import io.github.maze11.components.TransformComponent;
+import io.github.maze11.fixedStep.FixedStepper;
+import io.github.maze11.fixedStep.IteratingFixedStepSystem;
+import io.github.maze11.messages.CoffeeCollectMessage;
+import io.github.maze11.messages.GooseBiteMessage;
+import io.github.maze11.messages.MessageListener;
+import io.github.maze11.messages.MessagePublisher;
+import io.github.maze11.messages.PauseMessage;
+import io.github.maze11.messages.SoundMessage;
+
+/**
+ * Handles input, player movement and other player logic. This includes sending footsteps when the
+ * player moves.
+ */
+public class PlayerSystem extends IteratingFixedStepSystem {
+
+  private final ComponentMapper&lt;PlayerComponent&gt; playerMapper;
+  private final ComponentMapper&lt;TransformComponent&gt; transformMapper;
+  private final ComponentMapper&lt;PhysicsComponent&gt; physicsMapper;
+
+  // Generic animation component for PlayerState
+  private final ComponentMapper&lt;AnimationComponent&gt; animMapper;
+
+  private final MessageListener messageListener;
+  private final AssetLoader assetLoader;
+  private final MazeGame game;
+
+  public PlayerSystem(FixedStepper fixedStepper, MessagePublisher messagePublisher, MazeGame game) {
+<span class="nc" id="L45">    super(</span>
+        fixedStepper,
+<span class="nc" id="L47">        Family.all(PlayerComponent.class, TransformComponent.class, PhysicsComponent.class).get());</span>
+
+<span class="nc" id="L49">    this.game = game;</span>
+<span class="nc" id="L50">    playerMapper = ComponentMapper.getFor(PlayerComponent.class);</span>
+<span class="nc" id="L51">    transformMapper = ComponentMapper.getFor(TransformComponent.class);</span>
+<span class="nc" id="L52">    physicsMapper = ComponentMapper.getFor(PhysicsComponent.class);</span>
+
+    // Ashley ignores generics at runtime, so this is correct:
+<span class="nc" id="L55">    animMapper =</span>
+<span class="nc" id="L56">        ComponentMapper.getFor(AnimationComponent.class); // ComponentMapper&lt;AnimationComponent&gt;&gt;</span>
+
+<span class="nc" id="L58">    this.messageListener = new MessageListener(messagePublisher);</span>
+<span class="nc" id="L59">    this.assetLoader = game.getAssetLoader();</span>
+<span class="nc" id="L60">  }</span>
+
+  /** Calculate a direction vector from movement input */
+  private Vector2 getDirectionalInput() {
+<span class="nc" id="L64">    Vector2 direction = new Vector2();</span>
+
+<span class="nc bnc" id="L66" title="All 4 branches missed.">    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D))</span>
+<span class="nc" id="L67">      direction.x += 1f;</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">    if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A))</span>
+<span class="nc" id="L69">      direction.x -= 1f;</span>
+
+<span class="nc bnc" id="L71" title="All 4 branches missed.">    if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W))</span>
+<span class="nc" id="L72">      direction.y += 1f;</span>
+<span class="nc bnc" id="L73" title="All 4 branches missed.">    if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S))</span>
+<span class="nc" id="L74">      direction.y -= 1f;</span>
+
+<span class="nc bnc" id="L76" title="All 2 branches missed.">    if (direction.len2() &gt; 0) direction.nor();</span>
+
+<span class="nc" id="L78">    return direction;</span>
+  }
+
+  /** Handles inputs not related to movement, like pausing. */
+  private void handleMiscInput() {
+<span class="nc bnc" id="L83" title="All 2 branches missed.">    if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))</span>
+<span class="nc" id="L84">      messageListener.publisher.publish(new PauseMessage());</span>
+    ;
+<span class="nc" id="L86">  }</span>
+
+  @Override
+  public void fixedUpdate(float deltaTime) {
+<span class="nc" id="L90">    handleMiscInput();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">    while (messageListener.hasNext()) {</span>
+<span class="nc" id="L92">      var message = messageListener.next();</span>
+
+<span class="nc bnc" id="L94" title="All 3 branches missed.">      switch (message.type) {</span>
+<span class="nc" id="L95">        case COLLECT_COFFEE -&gt; processCoffeeCollect((CoffeeCollectMessage) message);</span>
+<span class="nc" id="L96">        case GOOSE_BITE -&gt; processGooseBite((GooseBiteMessage) message);</span>
+        default -&gt; {}
+      }
+<span class="nc" id="L99">    }</span>
+<span class="nc" id="L100">    super.fixedUpdate(deltaTime);</span>
+<span class="nc" id="L101">  }</span>
+
+  private void processCoffeeCollect(CoffeeCollectMessage message) {
+<span class="nc" id="L104">    PlayerComponent player = playerMapper.get(message.getPlayer());</span>
+<span class="nc" id="L105">    player.speedBonuses.add(</span>
+<span class="nc" id="L106">        new PlayerComponent.SpeedBonus(message.speedBonusAmount, message.duration));</span>
+<span class="nc" id="L107">  }</span>
+
+  private void processGooseBite(GooseBiteMessage message) {
+<span class="nc" id="L110">    Vector2 playerPos = transformMapper.get(message.getPlayer()).position;</span>
+<span class="nc" id="L111">    Vector2 goosePos = transformMapper.get(message.getInteractable()).position;</span>
+
+<span class="nc" id="L113">    Vector2 knockDir = new Vector2(playerPos).sub(goosePos).nor();</span>
+<span class="nc" id="L114">    addKnockback(playerMapper.get(message.getPlayer()), knockDir.scl(message.knockbackSpeed));</span>
+<span class="nc" id="L115">  }</span>
+
+  @Override
+  protected void fixedStepProcessEntity(Entity entity, float deltaTime) {
+<span class="nc" id="L119">    PlayerComponent player = playerMapper.get(entity);</span>
+<span class="nc" id="L120">    PhysicsComponent physics = physicsMapper.get(entity);</span>
+
+    // Generic component pulled as correct type
+<span class="nc" id="L123">    AnimationComponent&lt;PlayerState&gt; anim = animMapper.get(entity);</span>
+
+<span class="nc" id="L125">    Vector2 direction = getDirectionalInput();</span>
+
+    // Movement
+<span class="nc" id="L128">    float maxSpeed = player.maxSpeed;</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">    for (int i = 0; i &lt; player.speedBonuses.size(); i++) {</span>
+<span class="nc" id="L130">      var bonus = player.speedBonuses.get(i);</span>
+<span class="nc" id="L131">      maxSpeed += bonus.amount;</span>
+<span class="nc" id="L132">      bonus.timeRemaining -= deltaTime;</span>
+
+<span class="nc bnc" id="L134" title="All 2 branches missed.">      if (bonus.timeRemaining &lt;= 0) {</span>
+<span class="nc" id="L135">        player.speedBonuses.remove(i);</span>
+<span class="nc" id="L136">        i--;</span>
+      }
+    }
+
+<span class="nc" id="L140">    Vector2 naturalVelocity = player.naturalVelocity;</span>
+<span class="nc" id="L141">    Vector2 desiredVelocity = new Vector2(direction).scl(maxSpeed);</span>
+
+<span class="nc bnc" id="L143" title="All 2 branches missed.">    if (direction.len2() &gt; 0) {</span>
+<span class="nc" id="L144">      Vector2 toTarget = desiredVelocity.sub(naturalVelocity);</span>
+<span class="nc" id="L145">      float accelStep = player.acceleration * deltaTime;</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">      if (toTarget.len2() &gt; accelStep * accelStep) toTarget.nor().scl(accelStep);</span>
+
+<span class="nc" id="L149">      naturalVelocity.add(toTarget);</span>
+<span class="nc" id="L150">    } else {</span>
+<span class="nc" id="L151">      float speed = naturalVelocity.len();</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">      if (speed &gt; 0) {</span>
+<span class="nc" id="L153">        float dec = player.deceleration * deltaTime;</span>
+<span class="nc" id="L154">        speed = Math.max(speed - dec, 0);</span>
+<span class="nc" id="L155">        naturalVelocity.nor().scl(speed);</span>
+      }
+    }
+
+<span class="nc bnc" id="L159" title="All 2 branches missed.">    if (naturalVelocity.len2() &gt; maxSpeed * maxSpeed) naturalVelocity.nor().scl(maxSpeed);</span>
+
+    // Knockback decay
+<span class="nc" id="L162">    Vector2 knockback = player.currentKnockback;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">    if (knockback.len2() &gt; 0.001f) {</span>
+<span class="nc" id="L164">      float r = player.knockbackRecovery * deltaTime;</span>
+<span class="nc" id="L165">      float newSpeed = Math.max(knockback.len() - r, 0);</span>
+<span class="nc" id="L166">      knockback.nor().scl(newSpeed);</span>
+    }
+
+<span class="nc" id="L169">    physics.body.setLinearVelocity(</span>
+        naturalVelocity.x + knockback.x, naturalVelocity.y + knockback.y);
+
+    // Animation
+    PlayerState newState;
+
+<span class="nc bnc" id="L175" title="All 2 branches missed.">    if (direction.len2() == 0) {</span>
+<span class="nc" id="L176">      PlayerState last = anim.currentState;</span>
+
+<span class="nc bnc" id="L178" title="All 5 branches missed.">      switch (last) {</span>
+<span class="nc" id="L179">        case WALK_UP, IDLE_UP -&gt; newState = PlayerState.IDLE_UP;</span>
+<span class="nc" id="L180">        case WALK_DOWN, IDLE_DOWN -&gt; newState = PlayerState.IDLE_DOWN;</span>
+<span class="nc" id="L181">        case WALK_LEFT, IDLE_LEFT -&gt; newState = PlayerState.IDLE_LEFT;</span>
+<span class="nc" id="L182">        case WALK_RIGHT, IDLE_RIGHT -&gt; newState = PlayerState.IDLE_RIGHT;</span>
+
+<span class="nc" id="L184">        default -&gt; newState = PlayerState.IDLE_DOWN;</span>
+      }
+
+<span class="nc" id="L187">    } else {</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">      if (Math.abs(direction.x) &gt; Math.abs(direction.y)) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        newState = direction.x &gt; 0 ? PlayerState.WALK_RIGHT : PlayerState.WALK_LEFT;</span>
+      } else {
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        newState = direction.y &gt; 0 ? PlayerState.WALK_UP : PlayerState.WALK_DOWN;</span>
+      }
+    }
+
+<span class="nc bnc" id="L195" title="All 2 branches missed.">    if (anim.currentState != newState) {</span>
+<span class="nc" id="L196">      anim.currentState = newState;</span>
+<span class="nc" id="L197">      anim.elapsed = 0f;</span>
+    } else {
+<span class="nc" id="L199">      anim.elapsed += deltaTime;</span>
+    }
+
+<span class="nc" id="L202">    var animation = anim.animations.get(anim.currentState);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">    if (animation != null) {</span>
+<span class="nc" id="L204">      anim.currentFrame = animation.getKeyFrame(anim.elapsed, true);</span>
+    }
+<span class="nc" id="L206">  }</span>
+
+  private void addKnockback(PlayerComponent pc, Vector2 extra) {
+<span class="nc" id="L209">    Vector2 current = pc.currentKnockback;</span>
+<span class="nc" id="L210">    float maxMag = Math.max(current.len(), extra.len());</span>
+
+<span class="nc" id="L212">    current.add(extra);</span>
+
+<span class="nc bnc" id="L214" title="All 2 branches missed.">    if (current.len() &gt; maxMag) current.nor().scl(maxMag);</span>
+<span class="nc" id="L215">  }</span>
+
+  @Override
+  protected void processEntity(Entity entity, float deltaTime) {
+<span class="nc" id="L219">    PlayerComponent player = playerMapper.get(entity);</span>
+
+    // Only play footsteps while the player is moving
+<span class="nc bnc" id="L222" title="All 2 branches missed.">    if (player.naturalVelocity.len2() &gt; 0) {</span>
+<span class="nc" id="L223">      accumulateFootstep(player, deltaTime);</span>
+    }
+<span class="nc" id="L225">  }</span>
+
+  /** Advances the footstep time and play a footstep if it is due */
+  private void accumulateFootstep(PlayerComponent player, float deltaTime) {
+
+    // Footsteps happen faster while boosted
+<span class="nc" id="L231">    float timeMultiplier = 1f;</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">    if (!player.speedBonuses.isEmpty()) {</span>
+<span class="nc" id="L233">      timeMultiplier = player.boostFootstepMultiplier;</span>
+    }
+
+    // Accumulate the time
+<span class="nc" id="L237">    player.timeSinceLastFootstep += deltaTime * timeMultiplier;</span>
+
+    // If it is time for another footstep, take it
+<span class="nc bnc" id="L240" title="All 2 branches missed.">    if (player.timeSinceLastFootstep &gt; player.timeBetweenFootsteps) {</span>
+<span class="nc" id="L241">      player.timeSinceLastFootstep = 0f;</span>
+<span class="nc" id="L242">      messageListener.publisher.publish(</span>
+<span class="nc" id="L243">          new SoundMessage(assetLoader.get(AssetId.FOOTSTEP, Sound.class), 0.5f, 0.6f));</span>
+    }
+<span class="nc" id="L245">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

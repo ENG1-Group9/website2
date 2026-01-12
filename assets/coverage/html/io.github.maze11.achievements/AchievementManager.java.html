@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AchievementManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.achievements</a> &gt; <span class="el_source">AchievementManager.java</span></div><h1>AchievementManager.java</h1><pre class="source lang-java linenums">package io.github.maze11.achievements;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.Color;
+
+import io.github.maze11.components.AttendanceCheckerComponent;
+import io.github.maze11.fixedStep.FixedStepper;
+import io.github.maze11.fixedStep.IteratingFixedStepSystem;
+import io.github.maze11.messages.Message;
+import io.github.maze11.messages.MessageListener;
+import io.github.maze11.messages.MessagePublisher;
+import io.github.maze11.messages.ToastMessage;
+import io.github.maze11.systems.PiSystem;
+
+// currently achievements is not seen by the player only in the code
+// we need to show a toast or something when a player gets an achievement
+// and show all achievements somewhere
+
+public class AchievementManager extends IteratingFixedStepSystem {
+  public static final String PREF_NAME = &quot;MazeGameAchievementData&quot;;
+
+  private static Preferences prefs;
+  private static MessagePublisher messagePublisher;
+  private static MessageListener messageListener;
+<span class="nc" id="L32">  private static final Color messageColour = new Color(0.2f, 0.5f, 1f, 0f);</span>
+
+<span class="nc" id="L34">  private final ComponentMapper&lt;AttendanceCheckerComponent&gt; attendM =</span>
+<span class="nc" id="L35">      ComponentMapper.getFor(AttendanceCheckerComponent.class);</span>
+
+<span class="nc" id="L37">  private static Map&lt;String, Achievement&gt; achievements = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L38">  public static final String[] achievementNames = {</span>
+    &quot;Coffee Addict&quot;, &quot;SYS1 Trauma&quot;, &quot;Model Student&quot;, &quot;CLICK!?!&quot;, &quot;Pi Collecter&quot;, &quot;Bird Food&quot;
+  };
+<span class="nc" id="L41">  public static final String[] achievementDescriptions = {</span>
+    &quot;Drink all coffee on the map.&quot;,
+    &quot;Help out an old friend.&quot;,
+    &quot;Get 100% attendance.&quot;,
+    &quot;Unlock the secret room.&quot;,
+    &quot;Complete the rasberry pi.&quot;,
+    &quot;Get attacked by a goose 10 times.&quot;
+  };
+
+<span class="nc" id="L50">  private static int coffeesCollected = 0;</span>
+<span class="nc" id="L51">  private static int totalCoffeesInLevel =</span>
+      0; // The game will update this value as it creates the coffee's
+<span class="nc" id="L53">  private static int pisCollected = 0;</span>
+<span class="nc" id="L54">  private static int totalPisInLevel = 5; // The game will update this value as it creates the pi's</span>
+<span class="nc" id="L55">  private static int gooseBites = 0;</span>
+
+  public AchievementManager(FixedStepper stepper, MessagePublisher messagePublisher) {
+<span class="nc" id="L58">    super(stepper, Family.all(AttendanceCheckerComponent.class).get());</span>
+<span class="nc" id="L59">    AchievementManager.messagePublisher = messagePublisher;</span>
+<span class="nc" id="L60">    messageListener = new MessageListener(messagePublisher);</span>
+
+<span class="nc" id="L62">    prefs = Gdx.app.getPreferences(PREF_NAME);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">    for (int i = 0; i &lt; achievementNames.length; i++) {</span>
+<span class="nc" id="L64">      achievements.put(</span>
+          achievementNames[i], new Achievement(achievementNames[i], achievementDescriptions[i]));
+    }
+<span class="nc" id="L67">    loadScores();</span>
+<span class="nc" id="L68">  }</span>
+
+  public static void newRound() {
+    // Just resets for the current game like if the player quits and plays again
+<span class="nc" id="L72">    coffeesCollected = 0;</span>
+<span class="nc" id="L73">    pisCollected = 0;</span>
+<span class="nc" id="L74">    totalCoffeesInLevel = 0;</span>
+<span class="nc" id="L75">    totalCoffeesInLevel = 0;</span>
+<span class="nc" id="L76">    PiSystem.reset();</span>
+<span class="nc" id="L77">  }</span>
+
+  public void setMessagePublisher(MessagePublisher p) {
+<span class="nc" id="L80">    messagePublisher = p;</span>
+<span class="nc" id="L81">    messageListener = new MessageListener(messagePublisher);</span>
+<span class="nc" id="L82">  }</span>
+
+  @Override
+  public void fixedUpdate(float deltaTime) {
+<span class="nc bnc" id="L86" title="All 2 branches missed.">    while (messageListener.hasNext()) {</span>
+<span class="nc" id="L87">      Message msg = messageListener.next();</span>
+<span class="nc bnc" id="L88" title="All 7 branches missed.">      switch (msg.type) {</span>
+        case COLLECT_COFFEE -&gt; {
+<span class="nc" id="L90">          coffeesCollected++;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">          if (coffeesCollected == totalCoffeesInLevel) {</span>
+<span class="nc" id="L92">            unlockAchievement(achievementNames[0]);</span>
+          }
+        }
+<span class="nc" id="L95">        case GIVE_GLASSES -&gt; unlockAchievement(achievementNames[1]);</span>
+        case CHECK_IN_CODE_COLLECT -&gt; {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">          for (Entity entity : getEntities()) {</span>
+<span class="nc" id="L98">            AttendanceCheckerComponent attendanceChecker = attendM.get(entity);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">            if (attendanceChecker.calculateAttendance() == 1) {</span>
+<span class="nc" id="L100">              unlockAchievement(achievementNames[2]);</span>
+            }
+<span class="nc" id="L102">          }</span>
+<span class="nc" id="L103">        }</span>
+<span class="nc" id="L104">        case PRESSURE_PLATE_TRIGGER -&gt; unlockAchievement(achievementNames[3]);</span>
+        case PI_COLLECT -&gt; {
+<span class="nc" id="L106">          pisCollected++;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">          if (pisCollected == totalPisInLevel) {</span>
+<span class="nc" id="L108">            unlockAchievement(achievementNames[4]);</span>
+          }
+        }
+        case GOOSE_BITE -&gt; {
+<span class="nc" id="L112">          gooseBites++;</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">          if (gooseBites == 10) {</span>
+<span class="nc" id="L114">            unlockAchievement(achievementNames[5]);</span>
+          }
+        }
+        default -&gt; {}
+      }
+<span class="nc" id="L119">    }</span>
+<span class="nc" id="L120">  }</span>
+
+  @Override
+  protected void fixedStepProcessEntity(Entity entity, float deltaTime) {
+    // No actions need to be taken
+<span class="nc" id="L125">  }</span>
+
+  public static int getTotalCoffeeValue() {
+<span class="nc" id="L128">    return totalCoffeesInLevel;</span>
+  }
+
+  public static void onCoffeeMade() {
+<span class="nc" id="L132">    totalCoffeesInLevel++;</span>
+<span class="nc" id="L133">  }</span>
+
+  private static void loadScores() {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    for (Achievement a : achievements.values()) {</span>
+<span class="nc" id="L137">      boolean unlocked = prefs.getBoolean(a.getName(), false);</span>
+<span class="nc" id="L138">      a.setUnlocked(unlocked);</span>
+<span class="nc" id="L139">    }</span>
+<span class="nc" id="L140">  }</span>
+
+  public static void unlockAchievement(String name) {
+<span class="nc" id="L143">    Achievement a = achievements.get(name);</span>
+
+<span class="nc bnc" id="L145" title="All 2 branches missed.">    if (!a.isUnlocked()) {</span>
+<span class="nc" id="L146">      a.setUnlocked(true);</span>
+<span class="nc" id="L147">      String unlockText = &quot;Achievement Unlocked: &quot; + name + &quot;!&quot;;</span>
+<span class="nc" id="L148">      messagePublisher.publish(new ToastMessage(unlockText, 10, messageColour));</span>
+    }
+
+<span class="nc" id="L151">    prefs.putBoolean(name, true);</span>
+<span class="nc" id="L152">    prefs.flush();</span>
+<span class="nc" id="L153">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

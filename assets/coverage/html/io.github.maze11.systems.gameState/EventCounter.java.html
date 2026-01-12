@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EventCounter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.systems.gameState</a> &gt; <span class="el_source">EventCounter.java</span></div><h1>EventCounter.java</h1><pre class="source lang-java linenums">package io.github.maze11.systems.gameState;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import static java.util.Map.entry;
+
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+
+import io.github.maze11.components.AttendanceCheckerComponent;
+import io.github.maze11.messages.MessageType;
+import io.github.maze11.systems.PiSystem;
+
+/** Keeps count of the number of events and can output a score summary */
+<span class="fc" id="L17">public class EventCounter {</span>
+  /**
+   * Stores the event types this records, along with their effect on score and message to show in
+   * the win screen
+   */
+<span class="fc" id="L22">  private final Map&lt;MessageType, MessageData&gt; messageMappings =</span>
+<span class="fc" id="L23">      Map.ofEntries(</span>
+<span class="fc" id="L24">          entry(MessageType.COLLECT_COFFEE, new MessageData(&quot;Coffees Collected&quot;, 10)),</span>
+<span class="fc" id="L25">          entry(MessageType.GOOSE_BITE, new MessageData(&quot;Goose Bites&quot;, -10)));</span>
+
+<span class="fc" id="L27">  private final Map&lt;MessageType, Integer&gt; recordedCounts = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L28">  private final ComponentMapper&lt;AttendanceCheckerComponent&gt; attendM =</span>
+<span class="fc" id="L29">      ComponentMapper.getFor(AttendanceCheckerComponent.class);</span>
+<span class="fc" id="L30">  private final int scorePerLeftoverSecond = 1;</span>
+<span class="fc" id="L31">  private final int completionBonus = 100;</span>
+<span class="fc" id="L32">  private boolean bobEvent = false;</span>
+
+  /** Records that a new instance of this message was registered in the EventCounter */
+  public void receiveMessage(MessageType messageType) {
+    // Check if this is a message this class is supposed to track
+<span class="fc bfc" id="L37" title="All 2 branches covered.">    if (messageMappings.containsKey(messageType)) {</span>
+      // Increment the number of events of this type received by 1
+<span class="fc bfc" id="L39" title="All 2 branches covered.">      if (recordedCounts.containsKey(messageType)) {</span>
+<span class="fc" id="L40">        recordedCounts.put(messageType, recordedCounts.get(messageType) + 1);</span>
+      } else {
+<span class="fc" id="L42">        recordedCounts.put(messageType, 1);</span>
+      }
+    }
+<span class="fc bfc" id="L45" title="All 2 branches covered.">    if (messageType == MessageType.GIVE_GLASSES) {</span>
+<span class="fc" id="L46">      bobEvent = true;</span>
+    }
+<span class="fc" id="L48">  }</span>
+
+  /**
+   * Generates the player score and a breakdown of how it was obtained
+   *
+   * @param mazeExited Whether or not the player has reached the exit
+   * @param secondsRemaining The seconds remaining on the timer at this point
+   * @param timeTaken The time taken (seconds) to complete the game
+   * @param attendanceCheckerEntity Entity with AttendanceCheckerComponent
+   * @return A ScoreCard which contains the score and a breakdown of it
+   */
+  public ScoreCard makeScoreCard(
+      boolean mazeExited, int secondsRemaining, float timeTaken, Entity attendanceCheckerEntity) {
+<span class="fc" id="L61">    List&lt;String&gt; breakdown = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L62">    int totalScore = 0;</span>
+
+    // Calculate score from each of the tracked events
+<span class="fc bfc" id="L65" title="All 2 branches covered.">    for (var term : messageMappings.entrySet()) {</span>
+      // Get the number of events of this type collected. If no term, none of this event have been
+      // collected
+<span class="fc" id="L68">      int occurrences = recordedCounts.getOrDefault(term.getKey(), 0);</span>
+<span class="fc" id="L69">      MessageData data = term.getValue();</span>
+
+<span class="fc" id="L71">      int scoreContribution = data.scoreBonus * occurrences;</span>
+<span class="fc" id="L72">      totalScore += scoreContribution;</span>
+
+<span class="fc" id="L74">      breakdown.add(occurrences + &quot; &quot; + data.name + &quot;: &quot; + formatBonus(scoreContribution));</span>
+<span class="fc" id="L75">    }</span>
+
+<span class="fc" id="L77">    AttendanceCheckerComponent attendanceChecker = attendM.get(attendanceCheckerEntity);</span>
+<span class="fc" id="L78">    breakdown.add(</span>
+<span class="fc" id="L79">        &quot;Check in codes collected: &quot; + String.valueOf((int) attendanceChecker.getCollectedCodes()));</span>
+
+<span class="fc" id="L81">    float attendance = attendanceChecker.calculateAttendance();</span>
+<span class="fc" id="L82">    String attendanceString = String.valueOf((int) (attendance * 100)) + &quot;%&quot;;</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">    if (attendance &lt; 0.46f) {</span>
+<span class="fc" id="L84">      int scoreContribution =</span>
+          (int) (100 * (1f - (attendance * 2))); // higher attendance = less punishment
+<span class="fc" id="L86">      totalScore -= scoreContribution;</span>
+<span class="fc" id="L87">      breakdown.add(</span>
+<span class="fc" id="L88">          &quot;Bad attendance (&quot; + attendanceString + &quot;): -&quot; + String.valueOf(scoreContribution));</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">    } else if (attendance &gt;= 0.75f) {</span>
+<span class="fc" id="L90">      int scoreContribution =</span>
+          (int) (50 * (1f + (attendance * 2))); // higher attendance = more reward
+<span class="fc" id="L92">      totalScore += scoreContribution;</span>
+<span class="fc" id="L93">      breakdown.add(</span>
+<span class="fc" id="L94">          &quot;Good attendance (&quot; + attendanceString + &quot;): +&quot; + String.valueOf(scoreContribution));</span>
+<span class="fc" id="L95">    } else {</span>
+<span class="nc" id="L96">      breakdown.add(&quot;Average attendance (&quot; + attendanceString + &quot;)&quot;);</span>
+    }
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">    if (bobEvent) {</span>
+<span class="fc" id="L100">      breakdown.add(&quot;Glasses given to Bob: +100&quot;);</span>
+<span class="fc" id="L101">      totalScore += 100;</span>
+    }
+
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">    if (PiSystem.getSlicesCollected() == 5) {</span>
+<span class="nc" id="L105">      breakdown.add(&quot;Rasberry Pi Completed: +100&quot;);</span>
+<span class="nc" id="L106">      totalScore += 100;</span>
+    }
+
+    // Time left over and completion bonus is only available if the player has left the maze
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">    if (mazeExited) {</span>
+      // Add score for left over time
+<span class="nc" id="L112">      int scoreContribution = scorePerLeftoverSecond * secondsRemaining;</span>
+<span class="nc" id="L113">      totalScore += scoreContribution;</span>
+<span class="nc" id="L114">      breakdown.add(&quot;Time Taken: &quot; + String.format(&quot;%.2f&quot;, timeTaken) + &quot;s&quot;);</span>
+<span class="nc" id="L115">      breakdown.add(&quot;Time remaining bonus: &quot; + formatBonus(scoreContribution));</span>
+<span class="nc" id="L116">      totalScore += completionBonus;</span>
+<span class="nc" id="L117">      breakdown.add(&quot;Escape bonus: &quot; + formatBonus(completionBonus));</span>
+    }
+
+<span class="fc" id="L120">    return new ScoreCard(totalScore, breakdown);</span>
+  }
+
+  private String formatBonus(int bonus) {
+    // Add a + to the displayed contribution if it is positive or 0
+<span class="fc bfc" id="L125" title="All 2 branches covered.">    return bonus &gt;= 0 ? &quot;+&quot; + bonus : bonus + &quot;&quot;;</span>
+  }
+
+<span class="fc" id="L128">  private record MessageData(String name, int scoreBonus) {}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

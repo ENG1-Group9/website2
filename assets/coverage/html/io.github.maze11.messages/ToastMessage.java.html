@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ToastMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">io.github.maze11.messages</a> &gt; <span class="el_source">ToastMessage.java</span></div><h1>ToastMessage.java</h1><pre class="source lang-java linenums">package io.github.maze11.messages;
+
+import com.badlogic.gdx.graphics.Color;
+
+/** Requests a toast to appear on the screen */
+public class ToastMessage extends Message {
+
+  /** The text to display on the toast */
+  private final String text;
+
+  /** The duration to display the toast for */
+  private float durationLeft;
+
+  private Color backColour;
+  private Color textColour;
+
+  public ToastMessage(String text, float duration) {
+<span class="nc" id="L18">    super(MessageType.TOAST_SHOW);</span>
+<span class="nc" id="L19">    this.text = text;</span>
+<span class="nc" id="L20">    this.durationLeft = duration;</span>
+<span class="nc" id="L21">    this.backColour = new Color();</span>
+<span class="nc" id="L22">    backColour.set(0.1f, 0.1f, 0.1f, 0f);</span>
+<span class="nc" id="L23">    this.textColour = new Color();</span>
+<span class="nc" id="L24">    textColour.set(1f, 1f, 0.9f, 0);</span>
+<span class="nc" id="L25">  }</span>
+
+  public ToastMessage(String text, float duration, Color backColour, Color textColour) {
+<span class="nc" id="L28">    super(MessageType.TOAST_SHOW);</span>
+<span class="nc" id="L29">    this.text = text;</span>
+<span class="nc" id="L30">    this.durationLeft = duration;</span>
+<span class="nc" id="L31">    this.backColour = backColour;</span>
+<span class="nc" id="L32">    this.textColour = textColour;</span>
+<span class="nc" id="L33">  }</span>
+
+  public ToastMessage(String text, float duration, Color backColour) {
+<span class="nc" id="L36">    super(MessageType.TOAST_SHOW);</span>
+<span class="nc" id="L37">    this.text = text;</span>
+<span class="nc" id="L38">    this.durationLeft = duration;</span>
+<span class="nc" id="L39">    this.backColour = backColour;</span>
+<span class="nc" id="L40">    this.textColour = new Color();</span>
+<span class="nc" id="L41">    textColour.set(1f, 1f, 0.9f, 0);</span>
+<span class="nc" id="L42">  }</span>
+
+  /** Update the duration the toast will stay on screen */
+  public void setDuration(float duration) {
+<span class="nc" id="L46">    this.durationLeft = duration;</span>
+<span class="nc" id="L47">  }</span>
+
+  /**
+   * Decrease the duration left on this toast.
+   *
+   * @param amount
+   */
+  public void lowerDuration(float amount) {
+<span class="nc" id="L55">    this.durationLeft -= amount;</span>
+<span class="nc" id="L56">  }</span>
+
+  public float getDurationLeft() {
+<span class="nc" id="L59">    return durationLeft;</span>
+  }
+
+  public String getText() {
+<span class="nc" id="L63">    return text;</span>
+  }
+
+  public Color getBackColour() {
+<span class="nc" id="L67">    return backColour;</span>
+  }
+
+  public Color getTextColour() {
+<span class="nc" id="L71">    return textColour;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
